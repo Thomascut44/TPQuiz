@@ -23,22 +23,29 @@ namespace TPQuiz
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
-            if (txt_nom.Text != "" && txt_prenom.Text !="")
+            if (txt_nom.Text != "" && txt_prenom.Text != "")
             {
-                //txt_afficher.Text = "Bonjour à tous"; //Bonjour le commentaire
-                string result = "Bonjour ";
-                result += txt_prenom.Text +" "+txt_nom.Text + "\r\n La difficultés sélectionnée est: "+cbb_difficulte.SelectedItem;
-                txt_afficher.Text = result;
+                if (cbb_difficulte.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Aucune difficulté n'est selectionner", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    jeu J = new jeu();
+                    J.Show();
+                    this.Hide();
+
+                }
             }
-            else if (txt_prenom.Text == "" && txt_nom.Text !="")
+            else if (txt_prenom.Text == "" && txt_nom.Text != "")
             {
                 MessageBox.Show("Aucun prénom n'est rentré", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else if (txt_nom.Text == "" && txt_prenom.Text !="")
+            else if (txt_nom.Text == "" && txt_prenom.Text != "")
             {
                 MessageBox.Show("Aucun nom n'est rentré", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            else
+            else 
             {
                 MessageBox.Show("Aucun nom et prénom n'est rentré", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -49,7 +56,6 @@ namespace TPQuiz
             if (cbb_difficulte.SelectedItem == "Enfer")
             {
                 this.BackColor = Color.DarkRed;
-                lbl_rep.Font = new Font(lbl_rep.Font, FontStyle.Bold);
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Bold);
                 lbl_nom.Font = new Font(lbl_nom.Font, FontStyle.Bold);
                 lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Bold);
@@ -57,11 +63,12 @@ namespace TPQuiz
             else
             {
                 this.BackColor = Color.FromArgb(153, 180, 209);
-                lbl_rep.Font = new Font(lbl_rep.Font, FontStyle.Regular);
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Regular);
                 lbl_nom.Font = new Font(lbl_nom.Font, FontStyle.Regular);
                 lbl_prenom.Font = new Font(lbl_prenom.Font, FontStyle.Regular);
             }
         }
+
+
     }
 }
