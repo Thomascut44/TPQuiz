@@ -132,14 +132,16 @@
             this.textBox2.Enabled = false;
             this.textBox2.Location = new System.Drawing.Point(601, 51);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(156, 20);
+            this.textBox2.Size = new System.Drawing.Size(145, 20);
             this.textBox2.TabIndex = 8;
             // 
             // pbx_image
             // 
+            this.pbx_image.Image = global::TPQuiz.Properties.Resources.Interrogation;
             this.pbx_image.Location = new System.Drawing.Point(601, 92);
             this.pbx_image.Name = "pbx_image";
-            this.pbx_image.Size = new System.Drawing.Size(156, 138);
+            this.pbx_image.Size = new System.Drawing.Size(145, 138);
+            this.pbx_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbx_image.TabIndex = 9;
             this.pbx_image.TabStop = false;
             // 
@@ -170,7 +172,6 @@
             this.btn_valider.TabIndex = 12;
             this.btn_valider.Text = "Valider";
             this.btn_valider.UseVisualStyleBackColor = true;
-            this.btn_valider.Click += new System.EventHandler(this.btn_valider_Click);
             // 
             // jeu
             // 
