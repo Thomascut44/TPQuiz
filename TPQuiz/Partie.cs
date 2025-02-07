@@ -15,6 +15,7 @@ namespace TPQuiz
         public int bonneReponse;
         public int numQuestion;
 
+
         public Partie(List<Question> questionList) 
         {
             this.score = 0;
@@ -48,6 +49,7 @@ namespace TPQuiz
         {
             if (reponse == bonneReponse)
             {
+                
                 calculerScore(true); 
                 changerImg(pbx_image, true, false);
             }
@@ -65,7 +67,12 @@ namespace TPQuiz
             if (numQuestion<nbQuestionPartie)
     {
                 aleatoireReponse(txt_affichage, gd_reponse);
-                gd_reponse.Checked = false;
+                ckb_reponse1.Checked = false;
+                ckb_reponse2.Checked = false;
+                ckb_reponse3.Checked = false;
+                ckb_reponse4.Checked = false;
+                ckb_reponse5.Checked = false;
+
 
             }
             else
@@ -76,7 +83,7 @@ namespace TPQuiz
 
         private void aleatoireReponse(TextBox txt_affichage, GroupBox gd_reponse)
         {
-            int bonneReponse = questionList[numQuestion].reponse;
+            int bonneRep = questionList[numQuestion].reponse;
             txt_affichage.Text = questionList[numQuestion].enonce;
             List<int> reponseAleatoire = new List<int>() { 1, 2, 3, 4, 5 };
             Random rnd = new Random();
@@ -89,7 +96,7 @@ namespace TPQuiz
                 string reponse = "";
 
                 //Réaliser un switch permettant d’affecter à reponse la proposition sélectionnée de manière aléatoire
-                switch(i)
+                switch(random)
                 {
                     case 1:
                         reponse = questionList[numQuestion].proposition1;
@@ -111,7 +118,7 @@ namespace TPQuiz
                 }
 
                 getCheckBox(i, gd_reponse).Text = reponse;
-                if (bonneReponse == random)
+                if (bonneRep == random)
                 {
                     bonneReponse = i;
                 }
@@ -122,7 +129,7 @@ namespace TPQuiz
         {
             foreach (Control c in gd_reponse.Controls)
             {
-                if (c.GetType() == typeof(CheckBox) && c.Name == "ckb_reponse" + indice.ToString())
+                if (c.GetType() == typeof(CheckBox) && c.Name == "cbx_reponse" + indice.ToString())
                 {
                     return ((CheckBox)c);
                 }
@@ -130,6 +137,15 @@ namespace TPQuiz
             return null;
         }
 
+        public void finDePartie()
+        {
+            DialogResult msg;
+            msg = MessageBox.Show("Votre score est de " + score + ".\r\n Voulez vous rejouer", "Fin de la partie"
+                , MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            
+
+
+        }
 
     }
 }

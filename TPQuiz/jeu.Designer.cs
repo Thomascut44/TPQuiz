@@ -63,6 +63,7 @@
             this.cbx_reponse1.TabIndex = 1;
             this.cbx_reponse1.Text = "Réponse 1";
             this.cbx_reponse1.UseVisualStyleBackColor = true;
+            this.cbx_reponse1.Click += new System.EventHandler(this.cbx_reponse1Clic);
             // 
             // cbx_reponse2
             // 
@@ -73,6 +74,7 @@
             this.cbx_reponse2.TabIndex = 2;
             this.cbx_reponse2.Text = "Réponse 2";
             this.cbx_reponse2.UseVisualStyleBackColor = true;
+            this.cbx_reponse2.Click += new System.EventHandler(this.cbx_reponse1Clic);
             // 
             // cbx_reponse3
             // 
@@ -83,6 +85,7 @@
             this.cbx_reponse3.TabIndex = 3;
             this.cbx_reponse3.Text = "Réponse 3";
             this.cbx_reponse3.UseVisualStyleBackColor = true;
+            this.cbx_reponse3.Click += new System.EventHandler(this.cbx_reponse1Clic);
             // 
             // cbx_reponse5
             // 
@@ -93,6 +96,7 @@
             this.cbx_reponse5.TabIndex = 4;
             this.cbx_reponse5.Text = "Réponse 5";
             this.cbx_reponse5.UseVisualStyleBackColor = true;
+            this.cbx_reponse5.Click += new System.EventHandler(this.cbx_reponse1Clic);
             // 
             // cbx_reponse4
             // 
@@ -103,6 +107,7 @@
             this.cbx_reponse4.TabIndex = 5;
             this.cbx_reponse4.Text = "Réponse 4";
             this.cbx_reponse4.UseVisualStyleBackColor = true;
+            this.cbx_reponse4.Click += new System.EventHandler(this.cbx_reponse1Clic);
             // 
             // gbx_reponse
             // 
@@ -172,6 +177,7 @@
             this.btn_valider.TabIndex = 12;
             this.btn_valider.Text = "Valider";
             this.btn_valider.UseVisualStyleBackColor = true;
+            this.btn_valider.Click += new System.EventHandler(this.btn_valider_Click);
             // 
             // jeu
             // 

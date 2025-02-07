@@ -34,6 +34,29 @@ namespace TPQuiz
 
         }
 
+        private void btn_valider_Click(object sender, EventArgs e)
+        {
+            partie.validerReponse(reponseQuestion, pbx_image);
+            partie.numQuestion++;
+            partie.changerQuestion(textBox1, cbx_reponse1, cbx_reponse2, cbx_reponse3, cbx_reponse4, cbx_reponse5, this, gbx_reponse, pbx_image);
+            lbl_question.Text = (partie.numQuestion + 1).ToString();
+            reponseQuestion = 0;
+
+        }
+
+        private void cbx_reponse1Clic(object sender, EventArgs e)
+        {
+            //Boucle permettant de décocher toutes les cases à cocher du formulaire
+            foreach (var box in gbx_reponse.Controls.OfType<CheckBox>())
+            {
+                box.Checked = false;
+            }
+
+            ((CheckBox)sender).Checked = true;
+            //Mettre dans une variable la réponse choisis par l’utilisateur
+            reponseQuestion = Convert.ToInt32(((CheckBox)sender).Name.Substring(11,1));
+
+        }
     }
 
 }
