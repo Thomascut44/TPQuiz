@@ -1,30 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
 using System.Windows.Forms;
+using TPQuiz.Model;
+
 
 namespace TPQuiz
 {
-    internal class Partie
+    public class Partie
     {
-        public int score;
-        public int difficulte;
+
+        public int score;                   // Score du joueur 
+        public int difficulte;              // Difficulté choisie 
         public int nbQuestionPartie;
         public List<Question> questionList;
         public int bonneReponse;
         public int numQuestion;
+        public string nom;                  // Nom du joueur
+        public string prenom;               // Prénom du joueur
+        private int timerPartie;            // Stocke la durée totale de la partie
+        private Timer timer;                // Gère le timer
+        private int dureeTQuestion;         // Temps restant pour répondre à la question
+        private SousFormulaire SF;
 
-
-        public Partie(List<Question> questionList) 
+               
+        public Partie(string nom, string prenom, int difficulte,List<Question> questionL) 
         {
             this.score = 0;
-            this.difficulte = 0;
-            this.nbQuestionPartie = questionList.Count();
-            this.questionList = questionList;
+            //this.difficulte = 0;
+            questionList = questionL;
+            this.nbQuestionPartie = questionL.Count;            
             this.numQuestion = 0;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.difficulte = difficulte;
+            this.timerPartie = 0; // Initialisation du compteur de temps
+
 
         }
+
+        public void Timer_Tick(object sender, EventArgs e, TextBox temps, ProgressBar progressbar1, TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, Label numeroQuestion, Panel pnl_principal)
+        {
+            timerPartie++;
+            dureeTQuestion++;
+            progressbar1.Increment(1);
+            temps.Text = timerPartie.ToString() + " sec";
+            if (dureeTQuestion > 15)
+            {
+                validerReponse(0, PbImage);
+                numQuestion++;
+                numeroQuestion.Text = (numQuestion + 1).ToString();
+                changerQuestion(txt_affichage, ckb_reponse1, ckb_reponse2, ckb_reponse3, ckb_reponse4, ckb_reponse5, formulaire, gd_reponse, PbImage);
+                progressbar1.Value = 0;
+                dureeTQuestion = 0;
+            }
+        }
+
+        public void gestionTimer(TextBox txt_timer, ProgressBar progressbar1, TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, Label numQuestion, Panel pnl_principal)
+        {
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += (sender, e) => Timer_Tick(sender, e, txt_timer, progressbar1, txt_affichage, ckb_reponse1, ckb_reponse2, ckb_reponse3, ckb_reponse4, ckb_reponse5, formulaire, gd_reponse, PbImage, numQuestion, pnl_principal);
+
+            timer.Start();
+        }
+
         private void changerImg(PictureBox pbx_image, bool bonneReponse, bool raz) //private normalement
         {
             if (!raz)
@@ -65,7 +104,7 @@ namespace TPQuiz
         public void changerQuestion(TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage)
         {
             if (numQuestion<nbQuestionPartie)
-    {
+            {
                 aleatoireReponse(txt_affichage, gd_reponse);
                 ckb_reponse1.Checked = false;
                 ckb_reponse2.Checked = false;
@@ -78,6 +117,9 @@ namespace TPQuiz
             else
             {
                 //appel de la méthode de fin de partie qui sera réalisé plus tard
+                finDePartie(formulaire, PbImage, txt_affichage, ckb_reponse1, ckb_reponse2, ckb_reponse3, ckb_reponse4, ckb_reponse5, gd_reponse);
+
+
             }
         }
 
@@ -137,12 +179,36 @@ namespace TPQuiz
             return null;
         }
 
-        public void finDePartie()
+        public void finDePartie(Form formulaireJeuActif, PictureBox pbx_image, TextBox txt_affichage, CheckBox cbx_reponse1, CheckBox cbx_reponse2, CheckBox cbx_reponse3, CheckBox cbx_reponse4, CheckBox cbx_reponse5, GroupBox gbx_reponsen)
         {
             DialogResult msg;
             msg = MessageBox.Show("Votre score est de " + score + ".\r\n Voulez vous rejouer", "Fin de la partie"
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-            
+            if (msg == DialogResult.Yes) 
+            {
+                // Remettre le score à zéro
+                score = 0;
+                numQuestion = 0;
+
+                // Réinitialiser le temps
+                timerPartie = 0; 
+
+                // Remettre l’image par défaut
+                pbx_image.Image = Properties.Resources.Interrogation;
+
+                // Redémarrer le timer
+                
+
+                // Afficher la première question
+                changerQuestion(txt_affichage, cbx_reponse1, cbx_reponse2, cbx_reponse3, cbx_reponse4, cbx_reponse5, formulaireJeuActif, gbx_reponsen, pbx_image);
+
+                timer.Start();
+            }
+            else
+            {
+                // Revenir à l'écran précédent
+                SF.openChildForm(new Form1());
+            }
 
 
         }

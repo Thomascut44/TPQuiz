@@ -35,6 +35,7 @@
             this.txt_prenom = new System.Windows.Forms.TextBox();
             this.lbl_difficulte = new System.Windows.Forms.Label();
             this.cbb_difficulte = new System.Windows.Forms.ComboBox();
+            this.btn_ferme = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_valider
@@ -98,12 +99,23 @@
             this.cbb_difficulte.TabIndex = 8;
             this.cbb_difficulte.SelectedIndexChanged += new System.EventHandler(this.cbb_difficulte_SelectedIndexChanged);
             // 
+            // btn_ferme
+            // 
+            this.btn_ferme.Location = new System.Drawing.Point(743, 12);
+            this.btn_ferme.Name = "btn_ferme";
+            this.btn_ferme.Size = new System.Drawing.Size(29, 23);
+            this.btn_ferme.TabIndex = 9;
+            this.btn_ferme.Text = "X";
+            this.btn_ferme.UseVisualStyleBackColor = true;
+            this.btn_ferme.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(784, 387);
+            this.Controls.Add(this.btn_ferme);
             this.Controls.Add(this.cbb_difficulte);
             this.Controls.Add(this.lbl_difficulte);
             this.Controls.Add(this.txt_prenom);
@@ -111,6 +123,7 @@
             this.Controls.Add(this.lbl_prenom);
             this.Controls.Add(this.lbl_nom);
             this.Controls.Add(this.btn_valider);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -126,6 +139,7 @@
         private System.Windows.Forms.TextBox txt_prenom;
         private System.Windows.Forms.Label lbl_difficulte;
         private System.Windows.Forms.ComboBox cbb_difficulte;
+        private System.Windows.Forms.Button btn_ferme;
     }
 }
 

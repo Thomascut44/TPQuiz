@@ -35,12 +35,19 @@
             this.cbx_reponse5 = new System.Windows.Forms.CheckBox();
             this.cbx_reponse4 = new System.Windows.Forms.CheckBox();
             this.gbx_reponse = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_affichage = new System.Windows.Forms.TextBox();
+            this.txt_temps = new System.Windows.Forms.TextBox();
             this.pbx_image = new System.Windows.Forms.PictureBox();
             this.txt_titre = new System.Windows.Forms.Label();
             this.lbl_tpsTotal = new System.Windows.Forms.Label();
             this.btn_valider = new System.Windows.Forms.Button();
+            this.pgb_tempscout = new System.Windows.Forms.ProgressBar();
+            this.lbl_progressbar1 = new System.Windows.Forms.Label();
+            this.lbl_joueur = new System.Windows.Forms.Label();
+            this.lbl_difficulte = new System.Windows.Forms.Label();
+            this.txt_difficulte = new System.Windows.Forms.TextBox();
+            this.txt_prenom = new System.Windows.Forms.TextBox();
+            this.btn_ferme = new System.Windows.Forms.Button();
             this.gbx_reponse.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_image)).BeginInit();
             this.SuspendLayout();
@@ -123,27 +130,27 @@
             this.gbx_reponse.TabStop = false;
             this.gbx_reponse.Text = "Réponses possibles";
             // 
-            // textBox1
+            // txt_affichage
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(85, 84);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(479, 45);
-            this.textBox1.TabIndex = 7;
+            this.txt_affichage.Enabled = false;
+            this.txt_affichage.Location = new System.Drawing.Point(85, 84);
+            this.txt_affichage.Multiline = true;
+            this.txt_affichage.Name = "txt_affichage";
+            this.txt_affichage.Size = new System.Drawing.Size(479, 45);
+            this.txt_affichage.TabIndex = 7;
             // 
-            // textBox2
+            // txt_temps
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(601, 51);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(145, 20);
-            this.textBox2.TabIndex = 8;
+            this.txt_temps.Enabled = false;
+            this.txt_temps.Location = new System.Drawing.Point(601, 51);
+            this.txt_temps.Name = "txt_temps";
+            this.txt_temps.Size = new System.Drawing.Size(145, 20);
+            this.txt_temps.TabIndex = 8;
             // 
             // pbx_image
             // 
             this.pbx_image.Image = global::TPQuiz.Properties.Resources.Interrogation;
-            this.pbx_image.Location = new System.Drawing.Point(601, 92);
+            this.pbx_image.Location = new System.Drawing.Point(601, 84);
             this.pbx_image.Name = "pbx_image";
             this.pbx_image.Size = new System.Drawing.Size(145, 138);
             this.pbx_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -179,20 +186,87 @@
             this.btn_valider.UseVisualStyleBackColor = true;
             this.btn_valider.Click += new System.EventHandler(this.btn_valider_Click);
             // 
+            // pgb_tempscout
+            // 
+            this.pgb_tempscout.Location = new System.Drawing.Point(601, 278);
+            this.pgb_tempscout.Name = "pgb_tempscout";
+            this.pgb_tempscout.Size = new System.Drawing.Size(145, 23);
+            this.pgb_tempscout.TabIndex = 13;
+            // 
+            // lbl_progressbar1
+            // 
+            this.lbl_progressbar1.AutoSize = true;
+            this.lbl_progressbar1.Location = new System.Drawing.Point(598, 259);
+            this.lbl_progressbar1.Name = "lbl_progressbar1";
+            this.lbl_progressbar1.Size = new System.Drawing.Size(158, 13);
+            this.lbl_progressbar1.TabIndex = 14;
+            this.lbl_progressbar1.Text = "Temps de réponse à la question";
+            this.lbl_progressbar1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lbl_joueur
+            // 
+            this.lbl_joueur.AutoSize = true;
+            this.lbl_joueur.Location = new System.Drawing.Point(598, 311);
+            this.lbl_joueur.Name = "lbl_joueur";
+            this.lbl_joueur.Size = new System.Drawing.Size(39, 13);
+            this.lbl_joueur.TabIndex = 15;
+            this.lbl_joueur.Text = "Joueur";
+            // 
+            // lbl_difficulte
+            // 
+            this.lbl_difficulte.AutoSize = true;
+            this.lbl_difficulte.Location = new System.Drawing.Point(598, 365);
+            this.lbl_difficulte.Name = "lbl_difficulte";
+            this.lbl_difficulte.Size = new System.Drawing.Size(48, 13);
+            this.lbl_difficulte.TabIndex = 16;
+            this.lbl_difficulte.Text = "Difficulté";
+            // 
+            // txt_difficulte
+            // 
+            this.txt_difficulte.Location = new System.Drawing.Point(601, 391);
+            this.txt_difficulte.Name = "txt_difficulte";
+            this.txt_difficulte.Size = new System.Drawing.Size(145, 20);
+            this.txt_difficulte.TabIndex = 17;
+            // 
+            // txt_prenom
+            // 
+            this.txt_prenom.Location = new System.Drawing.Point(601, 334);
+            this.txt_prenom.Name = "txt_prenom";
+            this.txt_prenom.Size = new System.Drawing.Size(145, 20);
+            this.txt_prenom.TabIndex = 18;
+            // 
+            // btn_ferme
+            // 
+            this.btn_ferme.Location = new System.Drawing.Point(713, 12);
+            this.btn_ferme.Name = "btn_ferme";
+            this.btn_ferme.Size = new System.Drawing.Size(75, 23);
+            this.btn_ferme.TabIndex = 19;
+            this.btn_ferme.Text = "X";
+            this.btn_ferme.UseVisualStyleBackColor = true;
+            this.btn_ferme.Click += new System.EventHandler(this.btn_ferme_Click);
+            // 
             // jeu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 426);
+            this.Controls.Add(this.btn_ferme);
+            this.Controls.Add(this.txt_prenom);
+            this.Controls.Add(this.txt_difficulte);
+            this.Controls.Add(this.lbl_difficulte);
+            this.Controls.Add(this.lbl_joueur);
+            this.Controls.Add(this.lbl_progressbar1);
+            this.Controls.Add(this.pbx_image);
+            this.Controls.Add(this.pgb_tempscout);
             this.Controls.Add(this.btn_valider);
             this.Controls.Add(this.lbl_tpsTotal);
             this.Controls.Add(this.txt_titre);
-            this.Controls.Add(this.pbx_image);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txt_temps);
+            this.Controls.Add(this.txt_affichage);
             this.Controls.Add(this.gbx_reponse);
             this.Controls.Add(this.lbl_question);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "jeu";
             this.Text = "jeu";
             this.gbx_reponse.ResumeLayout(false);
@@ -212,11 +286,18 @@
         private System.Windows.Forms.CheckBox cbx_reponse5;
         private System.Windows.Forms.CheckBox cbx_reponse4;
         private System.Windows.Forms.GroupBox gbx_reponse;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_affichage;
+        private System.Windows.Forms.TextBox txt_temps;
         private System.Windows.Forms.PictureBox pbx_image;
         private System.Windows.Forms.Label txt_titre;
         private System.Windows.Forms.Label lbl_tpsTotal;
         private System.Windows.Forms.Button btn_valider;
+        private System.Windows.Forms.ProgressBar pgb_tempscout;
+        private System.Windows.Forms.Label lbl_progressbar1;
+        private System.Windows.Forms.Label lbl_joueur;
+        private System.Windows.Forms.Label lbl_difficulte;
+        private System.Windows.Forms.TextBox txt_difficulte;
+        private System.Windows.Forms.TextBox txt_prenom;
+        private System.Windows.Forms.Button btn_ferme;
     }
 }

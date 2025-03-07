@@ -23,6 +23,10 @@ namespace TPQuiz
 
         private void btn_valider_Click(object sender, EventArgs e)
         {
+            string nomJ = txt_nom.Text;
+            string prenomJ = txt_prenom.Text;
+            int difficultePartie = Convert.ToInt32(cbb_difficulte.SelectedIndex.ToString());
+
             if (txt_nom.Text != "" && txt_prenom.Text != "")
             {
                 if (cbb_difficulte.SelectedIndex == -1)
@@ -31,8 +35,8 @@ namespace TPQuiz
                 }
                 else
                 {
-                    jeu J = new jeu();
-                    J.Show();
+                    jeu J = new jeu(nomJ, prenomJ, difficultePartie);
+                    (System.Windows.Forms.Application.OpenForms["Menu"] as Menu).openChildForm(J);
                     this.Hide();
 
                 }
@@ -69,6 +73,9 @@ namespace TPQuiz
             }
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

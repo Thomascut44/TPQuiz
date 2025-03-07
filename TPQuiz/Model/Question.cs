@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TPQuiz
 {
-    internal class Question
+    public class Question
     {
         public string enonce;
         public int reponse;
