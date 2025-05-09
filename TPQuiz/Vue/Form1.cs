@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPQuiz.Controllers;
 
 namespace TPQuiz
 {
+
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
-            cbb_difficulte.Items.Add("Facile");
-            cbb_difficulte.Items.Add("Moyen");
-            cbb_difficulte.Items.Add("Difficile");
-            cbb_difficulte.Items.Add("Enfer"); 
+            Difficulte dt_listedifficulte = new Difficulte();
+            cbb_difficulte.DataSource = dt_listedifficulte.GetListeDifficulte();
+            cbb_difficulte.DisplayMember = "DIFFICULTE"; //nom de l’alias SQL ou nom de la colonne
+            cbb_difficulte.ValueMember = "IDDIFFICULTE";  //nom de l’alias SQL ou nom de la colonne
         }
 
         private void btn_valider_Click(object sender, EventArgs e)
@@ -29,7 +31,7 @@ namespace TPQuiz
 
             if (txt_nom.Text != "" && txt_prenom.Text != "")
             {
-                if (cbb_difficulte.SelectedIndex == -1)
+                if (cbb_difficulte.SelectedIndex == -1 || cbb_difficulte.SelectedIndex == 0)
                 {
                     MessageBox.Show("Aucune difficulté n'est selectionner", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -57,7 +59,7 @@ namespace TPQuiz
 
         private void cbb_difficulte_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbb_difficulte.SelectedItem == "Enfer")
+            if (cbb_difficulte.SelectedIndex == 4) // Index "Enfer"
             {
                 this.BackColor = Color.DarkRed;
                 lbl_difficulte.Font = new Font(lbl_difficulte.Font, FontStyle.Bold);

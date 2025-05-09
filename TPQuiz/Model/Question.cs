@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using TPQuiz.Model;
+using MySqlConnector;
 
 namespace TPQuiz
 {
@@ -28,5 +32,6 @@ namespace TPQuiz
             this.proposition4 = proposition4;
             this.proposition5 = proposition5;
         }
+
     }
 }

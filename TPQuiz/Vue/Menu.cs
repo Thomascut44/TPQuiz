@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TPQuiz.Model;
+using TPQuiz.Vue;
 
 namespace TPQuiz
 {
@@ -38,6 +39,11 @@ namespace TPQuiz
         private void démarrerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openChildForm(new Form1());
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openChildForm(new affichageBDD());
         }
     }
 }

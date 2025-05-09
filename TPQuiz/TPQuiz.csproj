@@ -107,7 +107,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Difficulte.cs" />
+    <Compile Include="Controllers\QuestionBDD.cs" />
     <Compile Include="Model\ConnectionBDD.cs" />
+    <Compile Include="Vue\affichageBDD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vue\affichageBDD.Designer.cs">
+      <DependentUpon>affichageBDD.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vue\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +139,9 @@
     <Compile Include="Vue\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vue\affichageBDD.resx">
+      <DependentUpon>affichageBDD.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vue\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

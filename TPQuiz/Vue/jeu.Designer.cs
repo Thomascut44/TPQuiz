@@ -223,6 +223,7 @@
             // 
             // txt_difficulte
             // 
+            this.txt_difficulte.Enabled = false;
             this.txt_difficulte.Location = new System.Drawing.Point(601, 391);
             this.txt_difficulte.Name = "txt_difficulte";
             this.txt_difficulte.Size = new System.Drawing.Size(145, 20);
@@ -230,6 +231,7 @@
             // 
             // txt_prenom
             // 
+            this.txt_prenom.Enabled = false;
             this.txt_prenom.Location = new System.Drawing.Point(601, 334);
             this.txt_prenom.Name = "txt_prenom";
             this.txt_prenom.Size = new System.Drawing.Size(145, 20);

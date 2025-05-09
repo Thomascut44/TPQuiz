@@ -21,19 +21,21 @@ namespace TPQuiz
         private Timer timer;                // Gère le timer
         private int dureeTQuestion;         // Temps restant pour répondre à la question
         private SousFormulaire SF;
+        private List<Question> listeAleatoire;
 
-               
+
         public Partie(string nom, string prenom, int difficulte,List<Question> questionL) 
         {
             this.score = 0;
             //this.difficulte = 0;
             questionList = questionL;
-            this.nbQuestionPartie = questionL.Count;            
+            this.nbQuestionPartie = 10; //listeAleatoire.Count;            
             this.numQuestion = 0;
             this.nom = nom;
             this.prenom = prenom;
             this.difficulte = difficulte;
             this.timerPartie = 0; // Initialisation du compteur de temps
+            listeAleatoireQuestion();
 
 
         }
@@ -125,8 +127,9 @@ namespace TPQuiz
 
         private void aleatoireReponse(TextBox txt_affichage, GroupBox gd_reponse)
         {
-            int bonneRep = questionList[numQuestion].reponse;
-            txt_affichage.Text = questionList[numQuestion].enonce;
+            // questionList remplacer par listeAleatoire
+            int bonneRep = listeAleatoire[numQuestion].reponse;
+            txt_affichage.Text = listeAleatoire[numQuestion].enonce;
             List<int> reponseAleatoire = new List<int>() { 1, 2, 3, 4, 5 };
             Random rnd = new Random();
 
@@ -141,19 +144,19 @@ namespace TPQuiz
                 switch(random)
                 {
                     case 1:
-                        reponse = questionList[numQuestion].proposition1;
+                        reponse = listeAleatoire[numQuestion].proposition1;
                         break;
                     case 2:
-                        reponse = questionList[numQuestion].proposition2;
+                        reponse = listeAleatoire[numQuestion].proposition2;
                         break;
                     case 3:
-                        reponse = questionList[numQuestion].proposition3;
+                        reponse = listeAleatoire[numQuestion].proposition3;
                         break;
                     case 4:
-                        reponse = questionList[numQuestion].proposition4;
+                        reponse = listeAleatoire[numQuestion].proposition4;
                         break;
                     case 5:
-                        reponse = questionList[numQuestion].proposition5;
+                        reponse = listeAleatoire[numQuestion].proposition5;
                         break;
 
 
@@ -186,6 +189,8 @@ namespace TPQuiz
                 , MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             if (msg == DialogResult.Yes) 
             {
+                listeAleatoire = listeAleatoireQuestion(); // On reset la liste de question aléatoire
+                listeAleatoire.Clear();
                 // Remettre le score à zéro
                 score = 0;
                 numQuestion = 0;
@@ -202,16 +207,37 @@ namespace TPQuiz
                 // Afficher la première question
                 changerQuestion(txt_affichage, cbx_reponse1, cbx_reponse2, cbx_reponse3, cbx_reponse4, cbx_reponse5, formulaireJeuActif, gbx_reponsen, pbx_image);
 
-                timer.Start();
+                //timer.Start();
             }
             else
             {
-                // Revenir à l'écran précédent
-                SF.openChildForm(new Form1());
+                formulaireJeuActif.Hide();
+
             }
 
 
-        }
 
+        }
+        public List<Question> listeAleatoireQuestion()
+        {
+            listeAleatoire = new List<Question>();
+            //List<int> reponseAleatoire = new List<int>();
+            //Création d’un tableau contenant les valeurs représentant l’ensemble des questions
+
+            Random rnd = new Random();
+            //Ajout des questions dans la liste aléatoire des questions
+            for (int i = 1; i <= 10; i++)
+            {
+                int randIndex = rnd.Next(questionList.Count);
+                if (listeAleatoire.Contains(questionList[randIndex]))
+                {
+                    i--;
+                }
+                else {
+                    listeAleatoire.Add(questionList[randIndex]);
+                }
+            }
+            return listeAleatoire;
+        }
     }
 }

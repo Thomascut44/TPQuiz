@@ -8,7 +8,11 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TPQuiz.Controllers;
+using TPQuiz.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using MySqlConnector;
+using MySqlX.XDevAPI.Relational;
 
 namespace TPQuiz
 {
@@ -24,25 +28,51 @@ namespace TPQuiz
 
         private void init() 
         {
+            // fin de partie ne reset pas les questions 
+
             InitializeComponent();
-           // partie.gestionTimer(temps); //nom timer a mettre !!!!!!
-            // TextBox affichage !!!!!
+            // partie.gestionTimer(temps); //nom timer a mettre !!!!!!
+            txt_prenom.Text = nomJoueur +" "+ prenomJoueur;
+            Difficulte df = new Difficulte();
+            txt_difficulte.Text = df.GetDifficultyNameById(difficultePartie);
 
             pgb_tempscout.Maximum = 15;  // Maximum de 15 secondes
             pgb_tempscout.Value = 0;     // Initialisation à 0
 
 
-            ListeQuestions = new List<Question>();
-            ListeQuestions.Add(new Question("Quelle est la capitale de la France ?", 1, 1, "Paris", "Londres", "Berlin", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale de l'Espagne ?", 4, 1, "Paris", "Londres", "Berlin", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale de l'Allemagne ?", 3, 1, "Paris", "Londres", "Berlin", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale de l'Italie ?", 5, 1, "Paris", "Londres", "Berlin", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale de l'Angleterre ?", 2, 1, "Paris", "Londres", "Berlin", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale de la Belgique ?", 1, 1, "Bruxelles", "Londres", "Berlin", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale de la Suisse ?", 2, 1, "Bruxelles", "Berne", "Berlin", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale du Luxembourg ?", 3, 1, "Bruxelles", "Berne", "Luxembourg", "Madrid", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale du Portugal ?", 4, 1, "Bruxelles", "Berne", "Luxembourg", "Lisbonne", "Rome"));
-            ListeQuestions.Add(new Question("Quelle est la capitale de l'Autriche ?", 5, 1, "Bruxelles", "Berne", "Luxembourg", "Lisbonne", "Vienne"));
+            //Déclaration d'une nouvelle liste !! A METTRE DANS QUESTIONBDD
+            List<Question> ListeQuestions = new List<Question>();
+            DataTable dt = new DataTable();
+            ConnectionBDD conn = new ConnectionBDD("192.168.10.16", "coutherut_thomas_BDD_QuizzAndTest", "coutherut_thomas", "vzb9UMK8");
+            // Instancier un objet dt de type DataTable
+            // Instancier un objet conn de type ConnectionBDD
+
+
+            try
+            {
+                using (MySqlCommand cmd = new MySqlCommand("SELECT IDQUESTION,ENONCEQUESTION, REPONSE1QUESTION, REPONSE2QUESTION, REPONSE3QUESTION, REPONSE4QUESTION, REPONSE5QUESTION, BONREPQUESTION, QUESTION.IDDIFFICULTE FROM QUESTION INNER JOIN DIFFICULTE on QUESTION.IDDIFFICULTE = DIFFICULTE.IDDIFFICULTE WHERE QUESTION.IDDIFFICULTE = " + difficultePartie + ";", conn.MySqlCo))
+                {
+                    conn.MySqlCo.Open();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    dt.Load(reader);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), "Erreur 3", MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign, true);
+            }
+
+
+
+            conn.MySqlCo.Close();
+            conn.MySqlCo = null;
+
+
+            //Remplir une liste avec une datatable
+            foreach (DataRow row in dt.Rows)
+            {
+                ListeQuestions.Add(new Question(row["ENONCEQUESTION"].ToString(), Convert.ToInt32(row["BONREPQUESTION"]), Convert.ToInt32(row["IDDIFFICULTE"]), row["REPONSE1QUESTION"].ToString(), row["REPONSE2QUESTION"].ToString(), row["REPONSE3QUESTION"].ToString(), row["REPONSE4QUESTION"].ToString(), row["REPONSE5QUESTION"].ToString()));
+            }
 
             partie = new Partie(nomJoueur, prenomJoueur, difficultePartie, ListeQuestions);
             partie.changerQuestion(txt_affichage,cbx_reponse1, cbx_reponse2, cbx_reponse3, cbx_reponse4, cbx_reponse5, this, gbx_reponse, pbx_image);
