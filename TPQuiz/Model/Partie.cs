@@ -40,7 +40,7 @@ namespace TPQuiz
 
         }
 
-        public void Timer_Tick(object sender, EventArgs e, TextBox temps, ProgressBar progressbar1, TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, Label numeroQuestion, Panel pnl_principal)
+        public void Timer_Tick(object sender, EventArgs e, TextBox temps, ProgressBar progressbar1, TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, Label numeroQuestion)
         {
             timerPartie++;
             dureeTQuestion++;
@@ -57,14 +57,15 @@ namespace TPQuiz
             }
         }
 
-        public void gestionTimer(TextBox txt_timer, ProgressBar progressbar1, TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, Label numQuestion, Panel pnl_principal)
+        public void gestionTimer(TextBox txt_timer, ProgressBar progressbar1, TextBox txt_affichage, CheckBox ckb_reponse1, CheckBox ckb_reponse2, CheckBox ckb_reponse3, CheckBox ckb_reponse4, CheckBox ckb_reponse5, Form formulaire, GroupBox gd_reponse, PictureBox PbImage, Label numQuestion)
         {
             timer = new Timer();
             timer.Interval = 1000;
-            timer.Tick += (sender, e) => Timer_Tick(sender, e, txt_timer, progressbar1, txt_affichage, ckb_reponse1, ckb_reponse2, ckb_reponse3, ckb_reponse4, ckb_reponse5, formulaire, gd_reponse, PbImage, numQuestion, pnl_principal);
+            timer.Tick += (sender, e) => Timer_Tick(sender, e, txt_timer, progressbar1, txt_affichage, ckb_reponse1, ckb_reponse2, ckb_reponse3, ckb_reponse4, ckb_reponse5, formulaire, gd_reponse, PbImage, numQuestion);
 
             timer.Start();
         }
+
 
         private void changerImg(PictureBox pbx_image, bool bonneReponse, bool raz) //private normalement
         {
@@ -207,7 +208,7 @@ namespace TPQuiz
                 // Afficher la première question
                 changerQuestion(txt_affichage, cbx_reponse1, cbx_reponse2, cbx_reponse3, cbx_reponse4, cbx_reponse5, formulaireJeuActif, gbx_reponsen, pbx_image);
 
-                //timer.Start();
+                timer.Start();
             }
             else
             {

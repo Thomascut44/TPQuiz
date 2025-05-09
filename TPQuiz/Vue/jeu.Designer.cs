@@ -271,6 +271,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "jeu";
             this.Text = "jeu";
+            this.Load += new System.EventHandler(this.jeu_Load);
             this.gbx_reponse.ResumeLayout(false);
             this.gbx_reponse.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_image)).EndInit();

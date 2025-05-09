@@ -199,6 +199,7 @@
             this.cbx_rep5.Size = new System.Drawing.Size(15, 14);
             this.cbx_rep5.TabIndex = 19;
             this.cbx_rep5.UseVisualStyleBackColor = true;
+            this.cbx_rep5.Click += new System.EventHandler(this.cbx_rep1_Click);
             // 
             // cbx_rep4
             // 
@@ -208,6 +209,7 @@
             this.cbx_rep4.Size = new System.Drawing.Size(15, 14);
             this.cbx_rep4.TabIndex = 18;
             this.cbx_rep4.UseVisualStyleBackColor = true;
+            this.cbx_rep4.Click += new System.EventHandler(this.cbx_rep1_Click);
             // 
             // cbx_rep3
             // 
@@ -217,6 +219,7 @@
             this.cbx_rep3.Size = new System.Drawing.Size(15, 14);
             this.cbx_rep3.TabIndex = 17;
             this.cbx_rep3.UseVisualStyleBackColor = true;
+            this.cbx_rep3.Click += new System.EventHandler(this.cbx_rep1_Click);
             // 
             // cbx_rep2
             // 
@@ -226,6 +229,7 @@
             this.cbx_rep2.Size = new System.Drawing.Size(15, 14);
             this.cbx_rep2.TabIndex = 16;
             this.cbx_rep2.UseVisualStyleBackColor = true;
+            this.cbx_rep2.Click += new System.EventHandler(this.cbx_rep1_Click);
             // 
             // cbx_rep1
             // 
@@ -235,6 +239,7 @@
             this.cbx_rep1.Size = new System.Drawing.Size(15, 14);
             this.cbx_rep1.TabIndex = 15;
             this.cbx_rep1.UseVisualStyleBackColor = true;
+            this.cbx_rep1.Click += new System.EventHandler(this.cbx_rep1_Click);
             // 
             // lbl_bonneReponse
             // 
@@ -264,6 +269,7 @@
             this.btn_valider.TabIndex = 12;
             this.btn_valider.Text = "Valider";
             this.btn_valider.UseVisualStyleBackColor = true;
+            this.btn_valider.Click += new System.EventHandler(this.btn_valider_Click);
             // 
             // cbx_difficulte2
             // 
@@ -363,6 +369,7 @@
             this.idQuestion.Name = "idQuestion";
             this.idQuestion.Size = new System.Drawing.Size(75, 23);
             this.idQuestion.TabIndex = 0;
+            this.idQuestion.Visible = false;
             // 
             // affichageBDD
             // 

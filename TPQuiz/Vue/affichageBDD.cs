@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -64,12 +65,14 @@ namespace TPQuiz.Vue
 
         private void btn_ajouter_question_Click(object sender, EventArgs e)
         {
+            lbl_titre.Text = "Ajout";
             pnl_modif.Visible = true;
             dgv_questions.Enabled = false;  
         }
 
         private void btn_modifier_question_Click(object sender, EventArgs e)
         {
+            lbl_titre.Text = "Modification";
             pnl_modif.Visible = true;
             dgv_questions.Enabled = false;
             idQuestion.Text = dgv_questions.CurrentRow.Cells["IDQUESTION"].Value.ToString();
@@ -79,12 +82,44 @@ namespace TPQuiz.Vue
             tbx_rep3.Text = dgv_questions.CurrentRow.Cells["REPONSE3QUESTION"].Value.ToString();
             tbx_rep4.Text = dgv_questions.CurrentRow.Cells["REPONSE4QUESTION"].Value.ToString();
             tbx_rep5.Text = dgv_questions.CurrentRow.Cells["REPONSE5QUESTION"].Value.ToString();
+            
+            
+            int bonneReponse = Convert.ToInt32(dgv_questions.CurrentRow.Cells["BONREPQUESTION"].Value);
+            //Boucle permettant de décocher toutes les cases à cocher du formulaire
+            foreach (var box in pnl_modif.Controls.OfType<CheckBox>())
+            {
+                if (Convert.ToInt32(box.Name.Substring(7,1)) == bonneReponse)
+                {
+                    box.Checked = true;
+                }
+            }
         }
 
         private void btn_annuler_Click(object sender, EventArgs e)
         {
             pnl_modif.Visible = false;
             dgv_questions.Enabled = true;
+        }
+
+        private void btn_valider_Click(object sender, EventArgs e)
+        {
+            pnl_modif.Visible = false;
+            dgv_questions.Enabled = true;
+        }
+
+
+        private void cbx_rep1_Click(object sender, EventArgs e)
+        {
+            int reponseQuestion = 0;
+            //Boucle permettant de décocher toutes les cases à cocher du formulaire
+            foreach (var box in pnl_modif.Controls.OfType<CheckBox>())
+            {
+                box.Checked = false;
+            }
+
+            ((CheckBox)sender).Checked = true;
+            //Mettre dans une variable la réponse choisis par l’utilisateur
+            reponseQuestion = Convert.ToInt32(((CheckBox)sender).Name.Substring(7, 1));
         }
     }
 }

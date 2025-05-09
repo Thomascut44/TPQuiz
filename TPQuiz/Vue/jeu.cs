@@ -31,7 +31,7 @@ namespace TPQuiz
             // fin de partie ne reset pas les questions 
 
             InitializeComponent();
-            // partie.gestionTimer(temps); //nom timer a mettre !!!!!!
+            //Partie.gestionTimer(txt_temps, pgb_tempscout, txt_affichage, cbx_reponse1, cbx_reponse2, cbx_reponse3, cbx_reponse4, cbx_reponse5, formulaire, gbx_reponse, pbx_image); 
             txt_prenom.Text = nomJoueur +" "+ prenomJoueur;
             Difficulte df = new Difficulte();
             txt_difficulte.Text = df.GetDifficultyNameById(difficultePartie);
@@ -44,8 +44,6 @@ namespace TPQuiz
             List<Question> ListeQuestions = new List<Question>();
             DataTable dt = new DataTable();
             ConnectionBDD conn = new ConnectionBDD("192.168.10.16", "coutherut_thomas_BDD_QuizzAndTest", "coutherut_thomas", "vzb9UMK8");
-            // Instancier un objet dt de type DataTable
-            // Instancier un objet conn de type ConnectionBDD
 
 
             try
@@ -112,6 +110,7 @@ namespace TPQuiz
 
         }
 
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -120,6 +119,11 @@ namespace TPQuiz
         private void btn_ferme_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void jeu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 
